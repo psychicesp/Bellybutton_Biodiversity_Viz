@@ -29,7 +29,9 @@ dropdown = d3.select("#selDataset")
 
 function buildDropdown() {
     sample.names.forEach(entry) {
-        dropdown.append('option').text("sup")
+        dropdown.append('option')
+        .attr("value", entry)
+        .text(entry)
     }
 }
 
