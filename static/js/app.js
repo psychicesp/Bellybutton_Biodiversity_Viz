@@ -20,3 +20,11 @@
 //     }
 // }
 // ---------- format END -------------
+
+//Weird error cascade reading the .json.  It happens on all of the 'solved' assigments as 
+//well so its presumably nothing I'm doing wrong.  Typed less than 10 characters to convert 
+//the .json to a usable .js, which seems to be the best solution in any case.
+
+console.log(samples.names)
+console.log(samples.metadata)
+console.log(samples.samples)
