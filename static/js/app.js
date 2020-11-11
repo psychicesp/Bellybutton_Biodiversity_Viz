@@ -77,6 +77,17 @@ function getSamplesData() {
                 .append('p').text(`Belly Button Type: ${bbtype}`)
                 .append('p').text(`Wash Freqency: ${wfreq}`)
             // Horizontal Bar Chart:
+            var barLayout = {
+                title: {
+                    text:
+                        `Test Subject #${IdNum}`,
+                    font: {
+                        size: 28,
+                        color: 'black'
+                    }
+                    
+                }
+            }
             bar_labels = otu_ids.map(function (entry) { return `OTU ${entry}` }).slice(0, 11)
             bar_values = sample_values.slice(0, 10)
             bar_text = otu_labels.slice(0, 10)
@@ -87,7 +98,7 @@ function getSamplesData() {
                 orientation: 'h',
                 text: bar_text
             }
-            Plotly.newPlot('bar', [barTrace])
+            Plotly.newPlot('bar', [barTrace], barLayout)
             // Bubble Chart:
             var bubbleLayout = {
                 xaxis: {
@@ -109,15 +120,6 @@ function getSamplesData() {
             }
             Plotly.newPlot('bubble', [bubbleTrace], bubbleLayout)
             // Gauge Chart
-            var gaugeLayout = {
-                title: {
-                    text: "Bellybutton Washing Frequency",
-                    font: {
-                        size: 24,
-                        color: 'black'
-                    }                    
-                }
-            }
             var gaugeTrace = {
                 domain: { x: [0, 1], y: [0, 1] },
                 value: wfreq,
@@ -132,7 +134,7 @@ function getSamplesData() {
                     bar: {color : 'Fuchsia'},
                 }
             }
-            Plotly.newPlot('gauge', [gaugeTrace], gaugeLayout)
+            Plotly.newPlot('gauge', [gaugeTrace])
             break;
         }
     };
