@@ -68,6 +68,7 @@ function getSamplesData() {
             sample_values = ${sample_values}
             otu_labels = ${otu_labels}`)
             // Demographics:
+
             demographics.append('p').text(`ID: ${IdNum}`)
                 .append('p').text(`Ethnicity: ${ethnicity}`)
                 .append('p').text(`Gender: ${gender}`)
@@ -76,14 +77,26 @@ function getSamplesData() {
                 .append('p').text(`Belly Button Type: ${bbtype}`)
                 .append('p').text(`Wash Freqency: ${wfreq}`)
             // Horizontal Bar Chart:
-            otu_labels = otu_ids.map(function(entry) {return String(entry)})
+            bar_labels = otu_ids.map(function(entry) {return `OTU ${entry}`}).slice(0,11)
+            bar_values = sample_values.slice(0,10)
+            bar_text = otu_labels.slice(0,10)
             var barTrace = {
                 type: 'bar',
-                x: sample_values,
-                y: otu_labels,
-                orientation: 'h'}
+                x: bar_values,
+                y: bar_labels,
+                orientation: 'h',
+                text: bar_text}
             Plotly.newPlot('bar', [barTrace])
             // Bubble Chart:
+            var bubbleTrace = {
+                x: otu_ids,
+                y: sample_values,
+                mode: 'markers',
+                marker: {
+                color: otu_ids.map(function(entry){return `rgb(${entry/2}, ${entry/2}, ${entry/2})`}),
+                size: otu_labels}
+            }
+            Plotly.newPlot('bubble', [bubbleTrace])
             // Gauge Chart
             break;
         }
