@@ -25,15 +25,18 @@
 //well so its presumably nothing I'm doing wrong.  Typed less than 10 characters to convert 
 //the .json to a usable .js, which seems to be the best solution in any case.
 
+//Building dropdown.
 dropdown = d3.select("#selDataset")
-
-console.log(samples.names[2])
+IdNum = dropdown.value()
+console.log(IdNum)
 
 function buildDropdown() {
-    samples["names"].forEach(function(entry){
+    samples.names.forEach(function(entry){
         dropdown.append("option")
         .text(entry)
     })
 }
-
 buildDropdown()
+//Populate Demographics
+
+demographics = d3.select("#sample-metadata")
