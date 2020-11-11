@@ -134,6 +134,7 @@ function buildCharts() {
 
 //Function to update the charts from samples data
 function optionChanged() {
+    demographics.selectAll('p').remove()
     getSamplesData()
 
 }
