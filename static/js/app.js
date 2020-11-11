@@ -77,15 +77,16 @@ function getSamplesData() {
                 .append('p').text(`Belly Button Type: ${bbtype}`)
                 .append('p').text(`Wash Freqency: ${wfreq}`)
             // Horizontal Bar Chart:
-            bar_labels = otu_ids.map(function(entry) {return `OTU ${entry}`}).slice(0,11)
-            bar_values = sample_values.slice(0,10)
-            bar_text = otu_labels.slice(0,10)
+            bar_labels = otu_ids.map(function (entry) { return `OTU ${entry}` }).slice(0, 11)
+            bar_values = sample_values.slice(0, 10)
+            bar_text = otu_labels.slice(0, 10)
             var barTrace = {
                 type: 'bar',
                 x: bar_values,
                 y: bar_labels,
                 orientation: 'h',
-                text: bar_text}
+                text: bar_text
+            }
             Plotly.newPlot('bar', [barTrace])
             // Bubble Chart:
             var bubbleTrace = {
@@ -94,13 +95,28 @@ function getSamplesData() {
                 mode: 'markers',
                 text: otu_labels,
                 marker: {
-                size: sample_values,
-                color: otu_ids,
-                colorscale: 'Picnic'}
-
+                    size: sample_values,
+                    color: otu_ids,
+                    colorscale: 'Picnic'
+                }
             }
             Plotly.newPlot('bubble', [bubbleTrace])
             // Gauge Chart
+            var gaugeTrace = {
+                domain: { x: [0, 1], y: [0, 1] },
+                value: wfreq,
+                title: { text: "Washing Frequency per Week" },
+                type: "indicator",
+                mode: "gauge+number",
+                gauge: {
+                    axis: { range: [null, 9] },
+                    steps: [
+                        { range: [0, 0.5], color: "brown" },
+                      ],
+                    bar: {color : 'Fuchsia'},
+                }
+            }
+            Plotly.newPlot('gauge', [gaugeTrace])
             break;
         }
     };
