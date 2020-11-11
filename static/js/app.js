@@ -76,6 +76,7 @@ function getSamplesData() {
                 .append('p').text(`Belly Button Type: ${bbtype}`)
                 .append('p').text(`Wash Freqency: ${wfreq}`)
             // Horizontal Bar Chart:
+            otu_labels = otu_ids.map(function(entry) {return String(entry)})
             var barTrace = {
                 type: 'bar',
                 x: sample_values,
