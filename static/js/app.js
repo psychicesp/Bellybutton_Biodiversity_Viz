@@ -67,13 +67,23 @@ function getSamplesData() {
             otu_ids = ${otu_ids}
             sample_values = ${sample_values}
             otu_labels = ${otu_labels}`)
-            demographics.append('p').text(`id = ${IdNum}
-ethnicity = ${ethnicity}
-gender = ${gender}
-age = ${age}
-location = ${location}
-bbtype = ${bbtype}
-wfreq = ${wfreq}`)
+            // Demographics:
+            demographics.append('p').text(`ID: ${IdNum}`)
+                .append('p').text(`Ethnicity: ${ethnicity}`)
+                .append('p').text(`Gender: ${gender}`)
+                .append('p').text(`Age: ${age}`)
+                .append('p').text(`Location: ${location}`)
+                .append('p').text(`Belly Button Type: ${bbtype}`)
+                .append('p').text(`Wash Freqency: ${wfreq}`)
+            // Horizontal Bar Chart:
+            var barTrace = {
+                type: 'bar',
+                x: sample_values,
+                y: otu_labels,
+                orientation: 'h'}
+            Plotly.newPlot('bar', [barTrace])
+            // Bubble Chart:
+            // Gauge Chart
             break;
         }
     };
@@ -84,19 +94,15 @@ wfreq = ${wfreq}`)
 function buildCharts() {
     getSamplesData()
     // Demographics:
-    demographics.append('p').text(`id = ${IdNum}
-ethnicity = ${ethnicity}
-gender = ${gender}
-age = ${age}
-location = ${location}
-bbtype = ${bbtype}
-wfreq = ${wfreq}`)
+    // Horizontal Bar Chart:
+    // Bubble Chart:
+    // 
 }
 
 //Function to update the charts from samples data
 function optionChanged() {
     getSamplesData()
-    
+
 }
 
 
