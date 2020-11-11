@@ -89,6 +89,13 @@ function getSamplesData() {
             }
             Plotly.newPlot('bar', [barTrace])
             // Bubble Chart:
+            var bubbleLayout = {
+                xaxis: {
+                    title:
+                        'OTU ID'
+                    
+                }
+            }
             var bubbleTrace = {
                 x: otu_ids,
                 y: sample_values,
@@ -100,12 +107,21 @@ function getSamplesData() {
                     colorscale: 'Picnic'
                 }
             }
-            Plotly.newPlot('bubble', [bubbleTrace])
+            Plotly.newPlot('bubble', [bubbleTrace], bubbleLayout)
             // Gauge Chart
+            var gaugeLayout = {
+                title: {
+                    text: "Bellybutton Washing Frequency",
+                    font: {
+                        size: 24,
+                        color: 'black'
+                    }                    
+                }
+            }
             var gaugeTrace = {
                 domain: { x: [0, 1], y: [0, 1] },
                 value: wfreq,
-                title: { text: "Washing Frequency per Week" },
+                title: { text: "Scrubs per Week" },
                 type: "indicator",
                 mode: "gauge+number",
                 gauge: {
@@ -116,7 +132,7 @@ function getSamplesData() {
                     bar: {color : 'Fuchsia'},
                 }
             }
-            Plotly.newPlot('gauge', [gaugeTrace])
+            Plotly.newPlot('gauge', [gaugeTrace], gaugeLayout)
             break;
         }
     };
