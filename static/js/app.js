@@ -1,8 +1,8 @@
 // ------- samples.json format -------
 // samples.json {
-//     .names{
-//         ["ID#s in a list"]
-//     },
+//     .names[
+//         "ID#s in a list"
+//     ],
 //     .metadata{
 //         .id: "ID #",
 //         .ethnicity: "Patient Ethnicity",
@@ -27,12 +27,13 @@
 
 dropdown = d3.select("#selDataset")
 
+console.log(samples.names[2])
+
 function buildDropdown() {
-    sample.names.forEach(entry) {
-        dropdown.append('option')
-        .attr("value", entry)
+    samples["names"].forEach(function(entry){
+        dropdown.append("option")
         .text(entry)
-    }
+    })
 }
 
 buildDropdown()
