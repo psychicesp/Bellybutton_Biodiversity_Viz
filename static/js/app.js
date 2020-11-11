@@ -93,8 +93,9 @@ function getSamplesData() {
                 y: sample_values,
                 mode: 'markers',
                 marker: {
-                color: otu_ids.map(function(entry){return `rgb(${entry/2}, ${entry/2}, ${entry/2})`}),
-                size: otu_labels}
+                color: 'Blue',
+                size: otu_labels,
+                opacity: 1}
             }
             Plotly.newPlot('bubble', [bubbleTrace])
             // Gauge Chart
