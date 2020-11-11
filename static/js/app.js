@@ -21,22 +21,87 @@
 // }
 // ---------- format END -------------
 
-//Weird error cascade reading the .json.  It happens on all of the 'solved' assigments as 
-//well so its presumably nothing I'm doing wrong.  Typed less than 10 characters to convert 
-//the .json to a usable .js, which seems to be the best solution in any case.
-
 //Building dropdown.
 dropdown = d3.select("#selDataset")
-IdNum = dropdown.value()
-console.log(IdNum)
 
-function buildDropdown() {
-    samples.names.forEach(function(entry){
-        dropdown.append("option")
+samples.names.forEach(function (entry) {
+    dropdown.append("option")
         .text(entry)
-    })
+})
+//Chart Locations
+var demographics = d3.select('#sample-metadata')
+var hBarChart = d3.select('#bar')
+var gaugeChart = d3.select('#gauge')
+
+//Function to get the data from a particular ID
+function getSamplesData() {
+    var IdNum = dropdown.property("value")
+    for (i = 0; i < samples.names.length; i++) {
+        if (samples.names[i] === IdNum) {
+            var ethnicity = samples.metadata[i].ethnicity;
+            var gender = samples.metadata[i].gender;
+            var age = samples.metadata[i].age;
+            var location = samples.metadata[i].location;
+            switch (samples.metadata[i].bbtype.toLowerCase()) {
+                case 'i':
+                    bbtype = "Innie"
+                    break;
+                case 'o':
+                    bbtype = "Outie"
+                    break;
+                default:
+                    bbtype = 'Weirdo'
+            };
+            var wfreq = samples.metadata[i].wfreq;
+            var otu_ids = samples.samples[i].otu_ids;
+            var sample_values = samples.samples[i].sample_values;
+            var otu_labels = samples.samples[i].otu_labels;
+            console.log(`
+            id = ${IdNum}
+            ethnicity = ${ethnicity}
+            gender = ${gender}
+            age = ${age}
+            location = ${location}
+            bbtype = ${bbtype}
+            wfreq = ${wfreq}
+            otu_ids = ${otu_ids}
+            sample_values = ${sample_values}
+            otu_labels = ${otu_labels}`)
+            demographics.append('p').text(`id = ${IdNum}
+ethnicity = ${ethnicity}
+gender = ${gender}
+age = ${age}
+location = ${location}
+bbtype = ${bbtype}
+wfreq = ${wfreq}`)
+            break;
+        }
+    };
 }
-buildDropdown()
+
+//Function to build the charts from samples data
+
+function buildCharts() {
+    getSamplesData()
+    // Demographics:
+    demographics.append('p').text(`id = ${IdNum}
+ethnicity = ${ethnicity}
+gender = ${gender}
+age = ${age}
+location = ${location}
+bbtype = ${bbtype}
+wfreq = ${wfreq}`)
+}
+
+//Function to update the charts from samples data
+function optionChanged() {
+    getSamplesData()
+    
+}
+
+
+
+
 //Populate Demographics
 
-demographics = d3.select("#sample-metadata")
+buildCharts()
