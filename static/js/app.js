@@ -35,9 +35,11 @@ var hBarChart = d3.select('#bar')
 var gaugeChart = d3.select('#gauge')
 
 //Function to get the data from a particular ID
-function getSamplesData() {
+function getDataMakeGraphs() {
     d3.json("static/js/samples.json").then((samples) => {
+        //Set ID number
         var IdNum = dropdown.property("value")
+        // Loop thorough all the lists in the json and get the ID corresponding data
         for (i = 0; i < samples.names.length; i++) {
             if (samples.names[i] === IdNum) {
                 var ethnicity = samples.metadata[i].ethnicity;
@@ -58,6 +60,7 @@ function getSamplesData() {
                 var otu_ids = samples.samples[i].otu_ids;
                 var sample_values = samples.samples[i].sample_values;
                 var otu_labels = samples.samples[i].otu_labels;
+                //log to console for debugging purposes
                 console.log(`
             id = ${IdNum}
             ethnicity = ${ethnicity}
@@ -69,8 +72,9 @@ function getSamplesData() {
             otu_ids = ${otu_ids}
             sample_values = ${sample_values}
             otu_labels = ${otu_labels}`)
-                // Demographics:
+                //Make table and graphs
 
+                // Demographics blurb:
                 demographics.append('p').text(`ID: ${IdNum}`)
                     .append('p').text(`Ethnicity: ${ethnicity}`)
                     .append('p').text(`Gender: ${gender}`)
@@ -78,6 +82,7 @@ function getSamplesData() {
                     .append('p').text(`Location: ${location}`)
                     .append('p').text(`Belly Button Type: ${bbtype}`)
                     .append('p').text(`Wash Freqency: ${wfreq}`)
+
                 // Horizontal Bar Chart:
                 var barLayout = {
                     title: {
@@ -87,7 +92,6 @@ function getSamplesData() {
                             size: 28,
                             color: 'black'
                         }
-
                     }
                 }
                 bar_labels = otu_ids.map(function (entry) { return `OTU ${entry}` }).slice(0, 11)
@@ -101,12 +105,12 @@ function getSamplesData() {
                     text: bar_text
                 }
                 Plotly.newPlot('bar', [barTrace], barLayout)
+
                 // Bubble Chart:
                 var bubbleLayout = {
                     xaxis: {
                         title:
                             'OTU ID'
-
                     }
                 }
                 var bubbleTrace = {
@@ -121,6 +125,7 @@ function getSamplesData() {
                     }
                 }
                 Plotly.newPlot('bubble', [bubbleTrace], bubbleLayout)
+
                 // Gauge Chart
                 var gaugeTrace = {
                     domain: { x: [0, 1], y: [0, 1] },
@@ -144,27 +149,12 @@ function getSamplesData() {
     }
     )
 }
+//Run the function
+getDataMakeGraphs()
 
-//Function to build the charts from samples data
-
-function buildCharts() {
-    getSamplesData()
-    // Demographics:
-    // Horizontal Bar Chart:
-    // Bubble Chart:
-    // 
-}
-
-//Function to update the charts from samples data
+//Function to clear demographics and rebuild
 function optionChanged() {
     demographics.selectAll('p').remove()
     getSamplesData()
 
 }
-
-
-
-
-//Populate Demographics
-
-buildCharts()
