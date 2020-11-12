@@ -155,6 +155,6 @@ getDataMakeGraphs()
 //Function to clear demographics and rebuild
 function optionChanged() {
     demographics.selectAll('p').remove()
-    getSamplesData()
+    getDataMakeGraphs()
 
 }
