@@ -1,6 +1,6 @@
 # Plotly Challenge
 
-### This project is to showcase data visualization using interactive charts constructed with Plotly. The completed project can be viewed on [GitHub Pages](https://psychicesp.github.io/Plotly-challenge/)  
+### This project is to showcase data visualization using interactive charts constructed with Plotly. The completed project can be viewed on [GitHub Pages](https://psychicesp.github.io/Bellybutton_Biodiversity_Viz/)  
   
 <br>
 
